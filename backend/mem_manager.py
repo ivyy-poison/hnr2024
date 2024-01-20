@@ -15,7 +15,7 @@ class MemoryManager:
         self.mem_dict[loc] = val
 
     def set_pc_register(self, pc : int):
-        self.pc_register = int
+        self.pc_register = pc
     
     def increment_pc_register(self):
         self.pc_register += 1

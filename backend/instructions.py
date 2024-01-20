@@ -56,6 +56,18 @@ def branch_not_equal(data, setter0_index, setter1_index, line_number):
     if data.read(setter0_index) != data.read(setter1_index):
         data.set_pc_register(line_number)
 
+def get_instruction_optype(instruction):
+    return instruction[0]
+
+def get_instruction_function(instruction):
+    return instruction[1]
+
+def get_line_operator(line : list[int]):
+    return line[0]
+
+def get_line_operands(line : list[int]):
+    return line[1:]
+
 instructions = {
                     1: [
                             ('PRINT_VALUE', print_value), ('PRINT_STRING', print_string),
