@@ -14,7 +14,6 @@ export default function Header() {
             <span className="w-full">Today's date is </span>
             <DatePicker className="ml-4 text-xl font-bold w-80" value={selectedDate} onValueChange={(newDate: DatePickerValue) => {
               if (newDate) {
-                alert(`date is selected to ${newDate.toLocaleDateString()}`)
                 setSelectedDate(newDate);
               }
             }} enableClear={false} />
