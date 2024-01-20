@@ -1,5 +1,5 @@
 def print_value(data, index):
-    print(int(data.read(index)))
+    print(data.read(index))
 
 def print_string(data, index):
     int_value = int(data.read(index))
