@@ -1,5 +1,9 @@
 class MemoryManager:
+    pc_register = 0
     mem_dict = dict()
+
+    def __init__(self):
+        self.pc_register = 0
 
     def read(self, loc: int):
         try:
@@ -9,6 +13,15 @@ class MemoryManager:
 
     def write(self, loc: int, val):
         self.mem_dict[loc] = val
+
+    def set_pc_register(self, pc : int):
+        self.pc_register = int
+    
+    def increment_pc_register(self):
+        self.pc_register += 1
+    
+    def read_pc_register(self):
+        return self.pc_register
 
 class LocNoDataError(Exception):
     def __init__(self, loc : int):
