@@ -1,14 +1,25 @@
 def print_value(data, index):
-    print(int(data.get(index)))
+    print(int(data.read(index)))
 
 def print_string(data, index):
-    int_value = int(data.get(index))
+    int_value = int(data.read(index))
     string_array = []
     while int_value:
         string_array.append(chr(int_value % 128))
         int_value //= 128
     string_array.reverse()
     print(''.join(string_array))
+
+def read_value(data, index):
+    data.write(index, int(input()))
+
+def read_string(data, index):
+    string = input()
+    num = 0
+    for char in string:
+        num *= 128
+        num += ord(char)
+    data.write(index, num)
 
 def set_value(data, index, value):
     data.write(index, value)
@@ -47,7 +58,8 @@ def branch_not_equal(data, setter0_index, setter1_index, line_number):
 
 instructions = {
                     1: [
-                            ('PRINT_VALUE', print_value), ('PRINT_STRING', print_string)
+                            ('PRINT_VALUE', print_value), ('PRINT_STRING', print_string),
+                            ("READ_VALUE", read_value), ("READ_STRING", read_string)
                         ],
                     2: [
                             ('SET', set_value), ('NOT', not_index)
