@@ -69,7 +69,7 @@ def generate_json_file(status_code : int, music_string : int, output):
         json_dict["Code sound"] = music_string
         json_dict["Output"] = output
 
-    file_name = f"outputs/{randint(1, FILE_ID_UPPER)}.json"
+    file_name = f"backend/outputs/{randint(1, FILE_ID_UPPER)}.json"
     with open(file_name, "w") as f:
         json.dump(json_dict, f)
     return file_name

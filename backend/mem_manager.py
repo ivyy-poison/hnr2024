@@ -2,7 +2,7 @@ class MemoryManager:
     def __init__(self, user_input_str : str):
         self.pc_register = 0
         self.mem_dict = dict()
-        self.user_inputs = [ln for ln in user_input_str.split('\\n') if len(ln.replace(" ", ""))]
+        self.user_inputs = [ln for ln in user_input_str.split('\n') if len(ln.replace(" ", ""))]
         self.user_input_count = 0
         self.print_vals = []
 
