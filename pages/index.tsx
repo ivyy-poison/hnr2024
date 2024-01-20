@@ -20,15 +20,7 @@ export default function Home() {
   const handleTranslate = async () => {
     const maxCodeLength = model === 'gpt-3.5-turbo' ? 6000 : 12000;
 
-    if (!apiKey) {
-      alert('Please enter an API key.');
-      return;
-    }
 
-    if (inputLanguage === outputLanguage) {
-      alert('Please select different languages.');
-      return;
-    }
 
     if (!inputCode) {
       alert('Please enter some code.');
@@ -130,7 +122,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Code Translator</title>
+        <title>HnR 2024</title>
         <meta
           name="description"
           content="Use AI to translate code from one language to another."
@@ -142,13 +134,7 @@ export default function Home() {
         <div className="mt-10 flex flex-col items-center justify-center sm:mt-20">
           <div className="text-4xl font-bold">AI Code Translator</div>
         </div>
-
-        <div className="mt-6 text-center text-sm">
-          <APIKeyInput apiKey={apiKey} onChange={handleApiKeyChange} />
-        </div>
-
         <div className="mt-2 flex items-center space-x-2">
-          <ModelSelect model={model} onChange={(value) => setModel(value)} />
 
           <button
             className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
@@ -158,28 +144,11 @@ export default function Home() {
             {loading ? 'Translating...' : 'Translate'}
           </button>
         </div>
-
-        <div className="mt-2 text-center text-xs">
-          {loading
-            ? 'Translating...'
-            : hasTranslated
-            ? 'Output copied to clipboard!'
-            : 'Enter some code and click "Translate"'}
-        </div>
-
         <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
           <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
             <div className="text-center text-xl font-bold">Input</div>
 
-            <LanguageSelect
-              language={inputLanguage}
-              onChange={(value) => {
-                setInputLanguage(value);
-                setHasTranslated(false);
-                setInputCode('');
-                setOutputCode('');
-              }}
-            />
+            
 
             {inputLanguage === 'Natural Language' ? (
               <TextBlock
@@ -203,14 +172,6 @@ export default function Home() {
           </div>
           <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
-
-            <LanguageSelect
-              language={outputLanguage}
-              onChange={(value) => {
-                setOutputLanguage(value);
-                setOutputCode('');
-              }}
-            />
 
             {outputLanguage === 'Natural Language' ? (
               <TextBlock text={outputCode} />

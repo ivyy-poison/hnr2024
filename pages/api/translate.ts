@@ -6,23 +6,26 @@ export const config = {
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  try {
-    const { inputLanguage, outputLanguage, inputCode, model, apiKey } =
-      (await req.json()) as TranslateBody;
+  // try {
+  //   const { inputLanguage, outputLanguage, inputCode, model, apiKey } =
+  //     (await req.json()) as TranslateBody;
 
-    const stream = await OpenAIStream(
-      inputLanguage,
-      outputLanguage,
-      inputCode,
-      model,
-      apiKey,
-    );
+  //   const stream = await OpenAIStream(
+  //     inputLanguage,
+  //     outputLanguage,
+  //     inputCode,
+  //     model,
+  //     apiKey,
+  //   );
 
-    return new Response(stream);
-  } catch (error) {
-    console.error(error);
-    return new Response('Error', { status: 500 });
-  }
+  //   return new Response(stream);
+  // } catch (error) {
+  //   console.error(error);
+  //   return new Response('Error', { status: 500 });
+  // }
+  const { inputLanguage, outputLanguage, inputCode, model, apiKey } = (await req.json()) as TranslateBody;
+  return new Response(inputCode);
+
 };
 
 export default handler;
