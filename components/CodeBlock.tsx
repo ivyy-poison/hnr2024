@@ -1,5 +1,5 @@
-import { StreamLanguage } from '@codemirror/language';
-import { go } from '@codemirror/legacy-modes/mode/go';
+// import { StreamLanguage } from '@codemirror/language';
+// import { go } from '@codemirror/legacy-modes/mode/go';
 import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
 import CodeMirror from '@uiw/react-codemirror';
 import { FC, useEffect, useState } from 'react';
@@ -41,7 +41,6 @@ export const CodeBlock: FC<Props> = ({
         editable={editable}
         value={code}
         minHeight="500px"
-        extensions={[StreamLanguage.define(go)]}
         theme={tokyoNight}
         onChange={(value) => onChange(value)}
       />
