@@ -1,4 +1,4 @@
-import { tokyoNight } from '@uiw/codemirror-theme-tokyo-night';
+import { androidstudio } from '@uiw/codemirror-themes-all';
 import CodeMirror from '@uiw/react-codemirror';
 import { FC, useEffect, useState } from 'react';
 
@@ -32,12 +32,12 @@ export const CodeBlock: FC<Props> = ({
   }
 
   return (
-    <div className="relative">
+    <div className="relative text-sm my-4">
       <CodeMirror
         editable={editable}
         value={code}
         minHeight="500px"
-        theme={tokyoNight}
+        theme={androidstudio}
         onChange={(value) => onChange(value)}
         onKeyDown={handleKeyPress}
       />
