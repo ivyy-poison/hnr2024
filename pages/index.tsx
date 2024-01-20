@@ -9,12 +9,11 @@ export default function Home() {
 
   const [inputCode, setInputCode] = useState<string>('');
   const [outputCode, setOutputCode] = useState<string>('');
-  // const [loading, setLoading] = useState<boolean>(false);
-
+  const [date, setDate] = useState<Date>(new Date());
 
   function handleTranslate() {
     axios.post('/api/translate', {
-      date: new Date(),
+      date: formatDate(date),
       code: inputCode,
     })
     .then((response) => {
@@ -25,6 +24,14 @@ export default function Home() {
       console.error('Error translating code:', error);
     })
   }
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
+  // useEffect(() => {
+  //   console.log(formatDate(date));
+  // }, [date])
 
   return (
     <>
@@ -39,7 +46,7 @@ export default function Home() {
       </Head>
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
         
-        <Header />
+        <Header date={date} setDate = {setDate} />
         {/* <button
           className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
           onClick={() => handleTranslate()}
