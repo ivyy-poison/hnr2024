@@ -12,6 +12,7 @@ export default function Home() {
   const [inputCode, setInputCode] = useState<string>('');
   const [outputCode, setOutputCode] = useState<string>('');
   const [userInput, setUserInput] = useState<string>('');
+  const [codeSound, setCodeSound] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
 
   function handleTranslate() {
@@ -21,11 +22,11 @@ export default function Home() {
       input: userInput
     })
     .then((response) => {
-      console.log(response)
-      setOutputCode(response.data);
+      setOutputCode(response.data["Output"].join("\n"));
+      setCodeSound(response.data["Code sound"]);
     })
     .catch((error) => {
-      console.error('Error translating code:', error);
+      console.error(error);
     })
   }
 

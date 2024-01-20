@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import { NextApiRequest, NextApiResponse } from 'next';
+import {readFile} from 'fs';
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { code, date, input } = req.body;
@@ -12,26 +13,27 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
 async function interpretCode(code: string, date: string, input: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const pythonProcess = spawn('python3', ['backend/test.py', '123', code]);
+    const pythonProcess = spawn('python3', ['backend/execute.py', date, code, input]);
 
-    let scriptOutput = '';
+    let jsonFileLocation = '';
     pythonProcess.stdout.on('data', (data) => {
-      scriptOutput += data.toString();
-    });
-
-    let scriptError = '';
-    pythonProcess.stderr.on('data', (data) => {
-      scriptError += data.toString();
+      jsonFileLocation += data.toString();
     });
 
     pythonProcess.on('close', (statusCode) => {
-      if (statusCode !== 0 || scriptError) {
-        console.error(`Python script failed with code ${statusCode} and error: ${scriptError}`);
-        reject(`Python script failed with code ${statusCode} and error: ${scriptError}`);
-      } else {
-        console.log('Python script executed successfully:', scriptOutput);
-        resolve(`Code: ${code}, input: ${input}, Date: ${date}, scriptOutput: ${scriptOutput}, scriptError: ${scriptError}`);
-      }
+      readFile(jsonFileLocation.trimEnd(), 'utf-8', (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          let json_data = JSON.parse(data);
+          if (json_data["Status code"] == 1 || json_data["Status code"] == 2) {
+            reject("Line error at line " + json_data["Line error"])
+          } else {
+            resolve(json_data);
+          }
+        }
+
+      })
     });
   });
 }
