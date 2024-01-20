@@ -1,5 +1,5 @@
 def print_value(data, index):
-    print(int(data.read(index)))
+    print(data.read(index))
 
 def print_string(data, index):
     int_value = int(data.read(index))
@@ -11,7 +11,10 @@ def print_string(data, index):
     print(''.join(string_array))
 
 def read_value(data, index):
-    data.write(index, int(input()))
+    try:
+        data.write(index, int(input()))
+    except ValueError:
+        raise InvalidInputFormatError()
 
 def read_string(data, index):
     string = input()
@@ -82,3 +85,6 @@ instructions = {
                             ('AND', and_indices), ('OR', or_indices), ('BEQ', branch_equal), ('BNE', branch_not_equal)
                         ]
                 }
+
+class InvalidInputFormatError(Exception):
+    pass

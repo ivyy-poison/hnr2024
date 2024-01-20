@@ -15,6 +15,8 @@ class MemoryManager:
         self.mem_dict[loc] = val
 
     def set_pc_register(self, pc : int):
+        if pc < 0:
+            raise InvalidLineError()
         self.pc_register = pc
     
     def increment_pc_register(self):
@@ -27,6 +29,8 @@ class LocNoDataError(Exception):
     def __init__(self, loc : int):
         super().__init__(f"Memory at location {loc} has no data")
 
+class InvalidLineError(Exception):
+    pass
 
 def test_mem_manager():
     test_mem = MemoryManager()
