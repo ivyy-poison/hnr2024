@@ -3,8 +3,9 @@ import Header from '@/components/Header';
 import { TextBlock } from '@/components/TextBlock';
 import { InputBlock } from '@/components/InputBlock';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { ButtonsOverlay} from '@/components/ButtonsOverlay';
 
 export default function Home() {
 
@@ -43,29 +44,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
+      <div className="flex flex-col h-screen items-center bg-[#0E1117] text-neutral-200 sm:px-10">
         
         <Header date={date} setDate = {setDate} />
-        <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
-          <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
+        <div className="mt-6 flex w-full max-w-[1200px] justify-between sm:flex-row sm:space-x-4">
+          <div className="h-100 justify-center space-y-2 sm:w-2/4">
             <div className="text-center text-xl font-bold">Input</div>
-
-              <CodeBlock
-                code={inputCode}
-                editable={true}
-                onChange={(value) => {
-                  setInputCode(value);
-                }}
-                onSubmit={handleTranslate}
-              />
-
-              <InputBlock text={userInput} onChange={setUserInput} onSubmit={handleTranslate} />
-            
-            
+            <CodeBlock
+              code={inputCode}
+              editable={true}
+              onChange={(value) => {
+                setInputCode(value);
+              }}
+              onSubmit={handleTranslate}
+            />
+            <InputBlock text={userInput} onChange={setUserInput} onSubmit={handleTranslate} />
           </div>
-          <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
+          <div className="h-full space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
-              <TextBlock text={outputCode} />
+            <TextBlock text={outputCode} />
+            <ButtonsOverlay />
           </div>
         </div>
       </div>
