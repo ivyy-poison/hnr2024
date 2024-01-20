@@ -1,28 +1,30 @@
-import { TranslateBody } from '@/types/types';
-import { OpenAIStream } from '@/utils';
-
 export const config = {
   runtime: 'edge',
 };
 
-const handler = async (req: Request): Promise<Response> => {
-  try {
-    const { inputLanguage, outputLanguage, inputCode, model, apiKey } =
-      (await req.json()) as TranslateBody;
+function POST(request: Request) {
+  return request.json().then(({ code, date }) => {
+    // Stub method to process the code and date
+    const output = interpretCode(code, date);
+    return new Response(output);
+  }).catch((err) => {
+    return new Response("something went wrong", { status: 500 });
+  });
+}
 
-    const stream = await OpenAIStream(
-      inputLanguage,
-      outputLanguage,
-      inputCode,
-      model,
-      apiKey,
-    );
+function interpretCode(code: string, date: string) {
+  return code;
+}
 
-    return new Response(stream);
-  } catch (error) {
-    console.error(error);
-    return new Response('Error', { status: 500 });
+function GET(request: Request) {
+  return new Response("Hello world!");
+}
+
+export default function handler(request: Request) {
+  
+  if (request.method === "POST") {
+    return POST(request);
+  } else {
+    return GET(request);
   }
-};
-
-export default handler;
+}
