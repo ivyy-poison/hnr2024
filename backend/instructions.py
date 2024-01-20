@@ -1,5 +1,5 @@
 def print_value(data, index):
-    print(data.read(index))
+    data.print_to_screen(data.read(index))
 
 def print_string(data, index):
     int_value = int(data.read(index))
@@ -8,16 +8,16 @@ def print_string(data, index):
         string_array.append(chr(int_value % 128))
         int_value //= 128
     string_array.reverse()
-    print(''.join(string_array))
+    data.print_to_screen(''.join(string_array))
 
 def read_value(data, index):
     try:
-        data.write(index, int(input()))
+        data.write(index, int(data.get_user_input()))
     except ValueError:
         raise InvalidInputFormatError()
 
 def read_string(data, index):
-    string = input()
+    string = data.get_user_input()
     num = 0
     for char in string:
         num *= 128
@@ -87,7 +87,10 @@ def get_line_operator(line : list[int]):
 def get_line_operands(line : list[int]):
     return line[1:]
 
-instructions = {
+def get_line_operand_count(line : list[int]):
+    return len(get_line_operands(line))
+
+instruction_table = {
                     1: [
                             ('PRINT_VALUE', print_value), ('PRINT_STRING', print_string),
                             ('READ_VALUE', read_value), ('READ_STRING', read_string)
@@ -102,6 +105,15 @@ instructions = {
                             ('BLT', branch_less_than), ('BLE', branch_less_equal), ('BGT', branch_greater_than), ('BLE', branch_greater_equal)
                         ]
                 }
+
+instruction_optype_table = {k: list(map(lambda pr: get_instruction_optype(pr), v)) for (k, v) in instruction_table.items()}
+
+instruction_table_count = [0] * 4
+for i in range(1, 4):
+    instruction_table_count[i] = instruction_table_count[i - 1] + len(instruction_table[i])
+
+def getMusicChar(num_args : int, operator_id : int) -> chr:
+    return chr(65 + instruction_table_count[num_args - 1] + operator_id)
 
 class InvalidInputFormatError(Exception):
     pass
