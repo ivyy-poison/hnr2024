@@ -2,7 +2,7 @@ import { CodeBlock } from '@/components/CodeBlock';
 import Header from '@/components/Header';
 import { TextBlock } from '@/components/TextBlock';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Home() {
