@@ -1,6 +1,6 @@
 import random
 from datetime import date
-from instructions import instructions
+from instructions import instruction_table
 
 DEMO_DATE = date(2024, 1, 21)
 
@@ -10,8 +10,8 @@ def randomize(today : date):
 #print(dict1)
 
     output_dict = {}
-    for k, _ in instructions.items():
-        output_dict[k] = list(map(lambda inst_pair: inst_pair[1], instructions[k]))
+    for k, _ in instruction_table.items():
+        output_dict[k] = list(map(lambda inst_pair: inst_pair[1], instruction_table[k]))
     #print(output_dict)
 
     if not today == DEMO_DATE:
