@@ -1,6 +1,6 @@
 def parse(filename):
     with open(filename) as f:
-        return [[int(j) for j in i.split()] for i in f.read().split('\n')]
+        return [[int(j) for j in i.split()] for i in f.read().split('\n') if len(i.replace(' ', ''))]
 
 def print_value(data, index):
     print(int(data.get(index)))
