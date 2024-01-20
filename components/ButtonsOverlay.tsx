@@ -10,6 +10,7 @@ export function ButtonsOverlay({handleRun}: props) {
         const synth = new Tone.Synth().toDestination();
         await Tone.start(); // Required to start audio context in some browsers
         synth.triggerAttackRelease("C4", "8n"); // Play note C4 for an 8th note (half a second)
+        synth.triggerAttackRelease("D4", "8n");
     }
 
     return (
