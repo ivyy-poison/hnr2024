@@ -36,7 +36,7 @@ export const CodeBlock: FC<Props> = ({
       <CodeMirror
         editable={editable}
         value={code}
-        minHeight="500px"
+        height="435px"
         theme={androidstudio}
         onChange={(value) => onChange(value)}
         onKeyDown={handleKeyPress}

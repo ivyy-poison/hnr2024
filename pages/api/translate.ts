@@ -2,17 +2,17 @@ import { spawn } from 'child_process';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const { code, date } = req.body;
-  interpretCode(code, date).then((result) => {
+  const { code, date, input } = req.body;
+  interpretCode(code, date, input).then((result) => {
     res.status(200).send(result);
   }).catch((error) => {
     res.status(404).send(error);
   });
 }
 
-async function interpretCode(code: string, date: string): Promise<string> {
+async function interpretCode(code: string, date: string, input: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const pythonProcess = spawn('python3', ['backend/test.py', '123', 'testing']);
+    const pythonProcess = spawn('python3', ['backend/test.py', '123', code]);
 
     let scriptOutput = '';
     pythonProcess.stdout.on('data', (data) => {
@@ -30,7 +30,7 @@ async function interpretCode(code: string, date: string): Promise<string> {
         reject(`Python script failed with code ${statusCode} and error: ${scriptError}`);
       } else {
         console.log('Python script executed successfully:', scriptOutput);
-        resolve(`Code: ${code}, status: ${statusCode}, Date: ${date}, scriptOutput: ${scriptOutput}, scriptError: ${scriptError}`);
+        resolve(`Code: ${code}, input: ${input}, Date: ${date}, scriptOutput: ${scriptOutput}, scriptError: ${scriptError}`);
       }
     });
   });
