@@ -1,6 +1,6 @@
 import random
 from datetime import date
-from instructions import instruction_table
+from instructions import instruction_table, instruction_optype_table, get_instruction_optype, get_instruction_function
 
 DEMO_DATE = date(2024, 1, 21)
 
@@ -11,14 +11,17 @@ def randomize(today : date):
 
     output_dict = {}
     for k, _ in instruction_table.items():
-        output_dict[k] = list(map(lambda inst_pair: inst_pair[1], instruction_table[k]))
+        output_dict[k] = list(instruction_table[k].copy())
     #print(output_dict)
 
     if not today == DEMO_DATE:
         random.seed(generate_date_seed(today))
         for _, v in output_dict.items():
             random.shuffle(v)
-    return output_dict
+    opcode_table = {k: list(map(lambda pr: get_instruction_optype(pr), v)) for (k, v) in output_dict.items()}
+    opfunc_table = {k: list(map(lambda pr: get_instruction_function(pr), v)) for (k, v) in output_dict.items()}
+    idx_conversion_table = {k: list(map(lambda op: instruction_optype_table[k].index(op), v)) for (k, v) in opcode_table.items()}
+    return idx_conversion_table, opfunc_table
 
 def generate_date_seed(dateVal : date):
     return dateVal.day *2 + dateVal.month + dateVal.year

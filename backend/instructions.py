@@ -112,8 +112,8 @@ instruction_table_count = [0] * 4
 for i in range(1, 4):
     instruction_table_count[i] = instruction_table_count[i - 1] + len(instruction_table[i])
 
-def getMusicChar(num_args : int, operator_id : int) -> chr:
-    return chr(65 + instruction_table_count[num_args - 1] + operator_id)
+def getMusicChar(op_idx_conversion_table : dict[list[int]], num_args : int, operator_id : int) -> chr:
+    return chr(65 + instruction_table_count[num_args - 1] + op_idx_conversion_table[num_args][operator_id])
 
 class InvalidInputFormatError(Exception):
     pass

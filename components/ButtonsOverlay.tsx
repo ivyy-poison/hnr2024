@@ -1,16 +1,20 @@
 import { Button, Card, Flex, Text, Title } from "@tremor/react";
 import * as Tone from "tone";
+import {tone_map} from "../pages/api/utils";
 
 interface props {
     handleRun: () => void;
+    codeSound: string
 }
 
-export function ButtonsOverlay({handleRun}: props) {
+export function ButtonsOverlay({handleRun, codeSound}: props) {
     async function playNote() {
         const synth = new Tone.Synth().toDestination();
         await Tone.start(); // Required to start audio context in some browsers
-        synth.triggerAttackRelease("C4", "8n"); // Play note C4 for an 8th note (half a second)
-        synth.triggerAttackRelease("D4", "8n");
+        for (let i = 0; i < codeSound.length; ++i) {
+            const now = Tone.now();
+            synth.triggerAttackRelease(tone_map.get(codeSound.charAt(i))!, "8n", now + 0.25 * i);
+        };
     }
 
     return (

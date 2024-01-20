@@ -1,9 +1,11 @@
-var map = {}
+import {Unit} from "tone";
+
+export const tone_map = new Map<String, Unit.Frequency>();
 const tone = ["C", "D", "E", "F", "G", "A", "B"]
 
 for (let i = 0; i < 20;  i++){
-    var character = String.fromCharCode(i+65);
-    map[character] = tone[(i+70) % 7] + (i+21)//7 
+    let character = String.fromCharCode(i+65);
+    tone_map.set(character, tone[(i+70) % 7] + Math.floor((i+21) / 7)); 
 }
 
 /* map["A"] = "C4";

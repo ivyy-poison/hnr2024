@@ -15,7 +15,7 @@ FILE_ID_UPPER = 1000000000
 
 def execute(date_string : str, code : str, user_input : str):
     date_obj = datetime.strptime(date_string, DATE_FORMAT).date()
-    instruction_table = randomize(date_obj)
+    op_idx_conversion_table, instruction_table = randomize(date_obj)
     memory = MemoryManager(user_input)
 
     parsed_code = parse(code)
@@ -30,8 +30,8 @@ def execute(date_string : str, code : str, user_input : str):
             operator_id = get_line_operator(line)
             num_args = len(get_line_operands(line))
             operation = instruction_table[num_args][operator_id]
+            music_string += getMusicChar(op_idx_conversion_table, num_args, operator_id)
             operation(memory, *get_line_operands(line))
-            music_string += getMusicChar(num_args, operator_id)
             executed_lines_of_code += 1
 
         if memory.read_pc_register() < 0:

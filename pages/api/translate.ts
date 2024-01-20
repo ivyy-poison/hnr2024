@@ -4,7 +4,7 @@ import {readFile} from 'fs';
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { code, date, input } = req.body;
-  interpretCode(code, date, input).then((result) => {
+  return interpretCode(code, date, input).then((result) => {
     res.status(200).send(result);
   }).catch((error) => {
     res.status(404).send(error);
@@ -27,7 +27,7 @@ async function interpretCode(code: string, date: string, input: string): Promise
         } else {
           let json_data = JSON.parse(data);
           if (json_data["Status code"] == 1 || json_data["Status code"] == 2) {
-            reject("Line error at line " + json_data["Line error"])
+            reject("Line error at line " + json_data["Line error"]);
           } else {
             resolve(json_data);
           }
@@ -44,8 +44,8 @@ function GET(request: NextApiRequest, response: NextApiResponse) {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    POST(req, res);
+    return POST(req, res);
   } else {
-    GET(req, res);
+    return GET(req, res);
   }
 }
