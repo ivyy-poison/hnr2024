@@ -9,11 +9,10 @@ export default function Home() {
 
   const [inputCode, setInputCode] = useState<string>('');
   const [outputCode, setOutputCode] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
 
 
   function handleTranslate() {
-    setLoading(true);
     axios.post('/api/translate', {
       date: new Date(),
       code: inputCode,
@@ -25,20 +24,7 @@ export default function Home() {
     .catch((error) => {
       console.error('Error translating code:', error);
     })
-    .finally(() => {
-      setLoading(false);
-    });
   }
-
-  const copyToClipboard = (text: string) => {
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  };
-
 
   return (
     <>
@@ -54,23 +40,24 @@ export default function Home() {
       <div className="flex h-full min-h-screen flex-col items-center bg-[#0E1117] px-4 pb-20 text-neutral-200 sm:px-10">
         
         <Header />
-        <button
+        {/* <button
           className="w-[140px] cursor-pointer rounded-md bg-violet-500 px-4 py-2 font-bold hover:bg-violet-600 active:bg-violet-700"
           onClick={() => handleTranslate()}
           disabled={loading}
         >
           {loading ? 'Translating...' : 'Translate'}
-        </button>
+        </button> */}
         <div className="mt-6 flex w-full max-w-[1200px] flex-col justify-between sm:flex-row sm:space-x-4">
           <div className="h-100 flex flex-col justify-center space-y-2 sm:w-2/4">
             <div className="text-center text-xl font-bold">Input</div>
             
               <CodeBlock
                 code={inputCode}
-                editable={!loading}
+                editable={true}
                 onChange={(value) => {
                   setInputCode(value);
                 }}
+                onSubmit={handleTranslate}
               />
             
           </div>

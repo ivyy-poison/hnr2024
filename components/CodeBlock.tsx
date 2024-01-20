@@ -6,12 +6,14 @@ interface Props {
   code: string;
   editable?: boolean;
   onChange?: (value: string) => void;
+  onSubmit?: () => void;
 }
 
 export const CodeBlock: FC<Props> = ({
   code,
   editable = false,
   onChange = () => {},
+  onSubmit = () => {}
 }) => {
   const [copyText, setCopyText] = useState<string>('Copy');
 
@@ -25,7 +27,7 @@ export const CodeBlock: FC<Props> = ({
 
   function handleKeyPress(event: React.KeyboardEvent) {
     if (event.ctrlKey && event.key === 'Enter') {
-      onChange(code);
+      onSubmit()
     }
   }
 
