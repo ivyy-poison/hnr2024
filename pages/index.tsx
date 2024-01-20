@@ -2,7 +2,7 @@ import { CodeBlock } from '@/components/CodeBlock';
 import Header from '@/components/Header';
 import { TextBlock } from '@/components/TextBlock';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 export default function Home() {
@@ -28,10 +28,6 @@ export default function Home() {
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
-
-  // useEffect(() => {
-  //   console.log(formatDate(date));
-  // }, [date])
 
   return (
     <>
@@ -63,9 +59,7 @@ export default function Home() {
           </div>
           <div className="mt-8 flex h-full flex-col justify-center space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
-
               <TextBlock text={outputCode} />
-            
           </div>
         </div>
       </div>
