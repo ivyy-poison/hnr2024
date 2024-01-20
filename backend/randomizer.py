@@ -24,7 +24,7 @@ def randomize(today):
             random.shuffle(output_dict[i])
     return output_dict
 
-print(randomize(datetime.date.today()))
+#print(randomize(datetime.date.today()))
 
 
 #print(output_dict)
