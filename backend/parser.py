@@ -13,12 +13,12 @@ def parse(filename):
             try:
                 instruction[i] = int(instruction[i])
             except ValueError:
-                raise InvalidCommandFormat()
+                raise InvalidCommandFormatError()
     return codelist
 
 class InvalidCommandError(Exception):
     pass
 
-class InvalidCommandFormat(Exception):
+class InvalidCommandFormatError(Exception):
     pass
 
