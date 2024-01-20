@@ -63,7 +63,7 @@ export default function Home() {
           <div className="h-full space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
             <TextBlock text={outputCode} />
-            <ButtonsOverlay />
+            <ButtonsOverlay handleRun={handleTranslate}/>
           </div>
         </div>
       </div>
