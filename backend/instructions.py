@@ -59,10 +59,26 @@ def branch_not_equal(data, setter0_index, setter1_index, line_number):
     if data.read(setter0_index) != data.read(setter1_index):
         data.set_pc_register(line_number)
 
+def branch_less_than(data, setter0_index, setter1_index, line_number):
+    if data.read(setter0_index) < data.read(setter1_index):
+        data.set_pc_register(line_number)
+
+def branch_less_equal(data, setter0_index, setter1_index, line_number):
+    if data.read(setter0_index) <= data.read(setter1_index):
+        data.set_pc_register(line_number)
+
+def branch_greater_than(data, setter0_index, setter1_index, line_number):
+    if data.read(setter0_index) > data.read(setter1_index):
+        data.set_pc_register(line_number)
+
+def branch_greater_equal(data, setter0_index, setter1_index, line_number):
+    if data.read(setter0_index) >= data.read(setter1_index):
+        data.set_pc_register(line_number)
+
 instructions = {
                     1: [
                             ('PRINT_VALUE', print_value), ('PRINT_STRING', print_string),
-                            ("READ_VALUE", read_value), ("READ_STRING", read_string)
+                            ('READ_VALUE', read_value), ('READ_STRING', read_string)
                         ],
                     2: [
                             ('SET', set_value), ('NOT', not_index)
@@ -70,7 +86,8 @@ instructions = {
                     3: [
                             ('ADD', add_indices), ('SUB', subtract_indices),
                             ('MULT', multiply_indices), ('DIV', divide_indices), ('MOD', modulo_indices),
-                            ('AND', and_indices), ('OR', or_indices), ('BEQ', branch_equal), ('BNE', branch_not_equal)
+                            ('AND', and_indices), ('OR', or_indices), ('BEQ', branch_equal), ('BNE', branch_not_equal),
+                            ('BLT', branch_less_than), ('BLE', branch_less_equal), ('BGT', branch_greater_than), ('BLE', branch_greater_equal)
                         ]
                 }
 
