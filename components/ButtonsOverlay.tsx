@@ -1,6 +1,8 @@
 import { Button, Card, Flex, Text, Title } from "@tremor/react";
 import * as Tone from "tone";
 import {tone_map} from "../pages/api/utils";
+import RunButton from "./RunButton";
+import ListenButton from "./ListenButton";
 
 interface props {
     handleRun: () => void;
@@ -19,13 +21,8 @@ export function ButtonsOverlay({handleRun, codeSound}: props) {
 
     return (
         <Flex justifyContent="end" className="space-x-2 pt-10 mt-8">
-            <Button size="md" variant="secondary" onClick={playNote}>
-                Listen
-            </Button>
-
-            <Button size="md" variant="primary" onClick={handleRun} >
-                Run
-            </Button>
+            <ListenButton codeSound={codeSound} />
+            <RunButton handleRun={handleRun} />
         </Flex>
     )
 }
