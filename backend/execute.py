@@ -18,12 +18,12 @@ def execute(date_string : str, code : str, user_input : str):
     op_idx_conversion_table, instruction_table = randomize(date_obj)
     memory = MemoryManager(user_input)
 
-    parsed_code = parse(code)
-
-    code_len = len(parsed_code)
-    executed_lines_of_code = 0
-    music_string = ""
     try:
+        parsed_code = parse(code)
+
+        code_len = len(parsed_code)
+        executed_lines_of_code = 0
+        music_string = ""
         while 0 <= memory.read_pc_register() < code_len and executed_lines_of_code < MAX_EXECUTABLE_LINES:
             line = parsed_code[memory.read_pc_register()]
             memory.increment_pc_register()
@@ -64,7 +64,7 @@ def generate_json_file(status_code : int, music_string : int, output):
     json_dict = {"Status code": status_code,
                  }
     if status_code == 1 or status_code == 2:
-        json_dict["Line error"] = output
+        json_dict["Line error"] = output + 1
     else:
         json_dict["Code sound"] = music_string
         json_dict["Output"] = output
