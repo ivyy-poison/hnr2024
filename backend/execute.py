@@ -87,10 +87,10 @@ class InsufficientCmdArgumentsException(Exception):
 # execute("01/21/2024", "SET 1 2\nPRINT_VALUE 1", "")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         raise InsufficientCmdArgumentsException
 
-    date_string = sys.argv[0]
-    code = sys.argv[1]
-    user_input = sys.argv[2]
+    date_string = sys.argv[1]
+    code = sys.argv[2]
+    user_input = sys.argv[3]
     execute(date_string, code, user_input)
