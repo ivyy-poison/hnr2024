@@ -8,6 +8,11 @@ for (let i = 0; i < 20;  i++){
     tone_map.set(character, tone[(i+70) % 7] + Math.floor((i+21) / 7)); 
 }
 
+for (let i = 3; i < 9; ++i) {
+    let character = String.fromCharCode(i + 32);
+    tone_map.set(character, tone[(i + 4) % 7] + Math.floor((i + 11) / 7));
+}
+
 /* map["A"] = "C4";
 map["B"] = "D4";
 map["C"] = "E4";

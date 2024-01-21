@@ -26,11 +26,7 @@ async function interpretCode(code: string, date: string, input: string): Promise
           reject(err);
         } else {
           let json_data = JSON.parse(data);
-          if (json_data["Status code"] == 1 || json_data["Status code"] == 2) {
-            reject("Line error at line " + json_data["Line error"]);
-          } else {
-            resolve(json_data);
-          }
+          resolve(json_data);
         }
 
       })

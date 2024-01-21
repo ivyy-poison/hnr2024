@@ -22,8 +22,13 @@ export default function Home() {
       input: userInput
     })
     .then((response) => {
-      setOutputCode(response.data["Output"].join("\n"));
-      setCodeSound(response.data["Code sound"]);
+      let statusCode = parseInt(response.data["Status code"]);
+      if (statusCode == 0 || statusCode > 2) {
+        setOutputCode(response.data["Output"].join("\n"));
+        setCodeSound(response.data["Code sound"] + (statusCode > 2 ? String.fromCharCode(32 + statusCode) : ""));
+      } else {
+        setOutputCode("Line error at line " + response.data["Line error"]);
+      }
     })
     .catch((error) => {
       console.error(error);
@@ -37,10 +42,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>HnR 2024</title>
+        <title>ASM(R) Emulator</title>
         <meta
           name="description"
-          content="Use AI to translate code from one language to another."
+          content="The most annoying multisensory emulator in existence"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
