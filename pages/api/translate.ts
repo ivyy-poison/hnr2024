@@ -13,7 +13,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
 async function interpretCode(code: string, date: string, input: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    const pythonProcess = spawn('python', ['backend/execute.py', date, code, input]);
+    const pythonProcess = spawn('python3', ['backend/execute.py', date, code, input]);
 
     let jsonFileLocation = '';
     pythonProcess.stdout.on('data', (data) => {
