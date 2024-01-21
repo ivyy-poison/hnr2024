@@ -102,7 +102,7 @@ instruction_table = {
                             ('ADD', add_indices), ('SUB', subtract_indices),
                             ('MULT', multiply_indices), ('DIV', divide_indices), ('MOD', modulo_indices),
                             ('AND', and_indices), ('OR', or_indices), ('BEQ', branch_equal), ('BNE', branch_not_equal),
-                            ('BLT', branch_less_than), ('BLE', branch_less_equal), ('BGT', branch_greater_than), ('BLE', branch_greater_equal)
+                            ('BLT', branch_less_than), ('BLE', branch_less_equal), ('BGT', branch_greater_than), ('BGE', branch_greater_equal)
                         ]
                 }
 
