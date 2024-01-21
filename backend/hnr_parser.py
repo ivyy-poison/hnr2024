@@ -7,7 +7,7 @@ def parse(code : str) -> list[tuple[int]]:
         except ValueError:
             raise InvalidOperandError
     
-    codelist = (list(ln.split()) for ln in code.split('\n') if len(ln.replace(' ', '')))
+    codelist = (list(ln.split()) for ln in code.split('\\n') if len(ln.replace(' ', '')))
     parsed_code = []
     try:
         for instruction in codelist:
