@@ -12,7 +12,7 @@ def parse(code : str) -> list[tuple[int]]:
     for instruction in codelist:
         try:
             operator_id = instruction_optype_table[get_line_operand_count(instruction)].index(get_line_operator(instruction).upper())
-        except ValueError, KeyError:
+        except (ValueError, KeyError):
             if get_line_operator(instruction).upper() in instruction_name_table:
                 raise InvalidNumOperandsError(len(parsed_code))
             raise InvalidOperatorError(len(parsed_code))
