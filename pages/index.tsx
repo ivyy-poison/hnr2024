@@ -14,8 +14,10 @@ export default function Home() {
   const [userInput, setUserInput] = useState<string>('');
   const [codeSound, setCodeSound] = useState<string>('');
   const [date, setDate] = useState<Date>(new Date());
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   function handleTranslate() {
+    setLoading(true);
     axios.post('/api/translate', {
       date: formatDate(date),
       code: inputCode,
@@ -33,6 +35,9 @@ export default function Home() {
     .catch((error) => {
       console.error(error);
     })
+    .finally(() => {
+      setLoading(false);
+    });
   }
 
   const formatDate = (date: Date) => {
@@ -69,7 +74,7 @@ export default function Home() {
           <div className="h-full space-y-2 sm:mt-0 sm:w-2/4">
             <div className="text-center text-xl font-bold">Output</div>
             <TextBlock text={outputCode} />
-            <ButtonsOverlay handleRun={handleTranslate} codeSound={codeSound}/>
+            <ButtonsOverlay handleRun={handleTranslate} codeSound={codeSound} isLoading={isLoading}/>
           </div>
         </div>
       </div>
