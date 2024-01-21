@@ -6,7 +6,7 @@ from datetime import datetime
 from randomizer import randomize
 
 from mem_manager import MemoryManager, NoUserInputError, LocNoDataError, InvalidLineError
-from hnr_parser import parse, InvalidOperatorError, InvalidOperandError
+from hnr_parser import parse, InvalidOperatorError, InvalidOperandError, InvalidNumOperandsError
 from instructions import get_line_operands, get_line_operator, InvalidInputFormatError, getMusicChar
 
 DATE_FORMAT = "%m/%d/%Y"
