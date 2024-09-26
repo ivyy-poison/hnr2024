@@ -108,6 +108,8 @@ instruction_table = {
 
 instruction_optype_table = {k: list(map(lambda pr: get_instruction_optype(pr), v)) for (k, v) in instruction_table.items()}
 
+instruction_name_table = {j for i in instruction_table.values() for j, k in i}
+
 instruction_table_count = [0] * 4
 for i in range(1, 4):
     instruction_table_count[i] = instruction_table_count[i - 1] + len(instruction_table[i])

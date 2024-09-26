@@ -6,7 +6,7 @@ from datetime import datetime
 from randomizer import randomize
 
 from mem_manager import MemoryManager, NoUserInputError, LocNoDataError, InvalidLineError
-from hnr_parser import parse, InvalidOperatorError, InvalidOperandError
+from hnr_parser import parse, InvalidOperatorError, InvalidOperandError, InvalidNumOperandsError
 from instructions import get_line_operands, get_line_operator, InvalidInputFormatError, getMusicChar
 
 DATE_FORMAT = "%m/%d/%Y"
@@ -46,18 +46,20 @@ def execute(date_string : str, code : str, user_input : str):
         print(generate_json_file(1, "", e.line_number))
     except InvalidOperandError as e:
         print(generate_json_file(2, "", e.line_number))
+    except InvalidNumOperandsError as e:
+        print(generate_json_file(3, "", e.line_number))
     except InvalidInputFormatError:
-        print(generate_json_file(3, music_string, memory.get_outputs()))
-    except ZeroDivisionError:
         print(generate_json_file(4, music_string, memory.get_outputs()))
-    except CodeRuntimeExceedException:
+    except ZeroDivisionError:
         print(generate_json_file(5, music_string, memory.get_outputs()))
-    except LocNoDataError:
+    except CodeRuntimeExceedException:
         print(generate_json_file(6, music_string, memory.get_outputs()))
-    except NoUserInputError:
+    except LocNoDataError:
         print(generate_json_file(7, music_string, memory.get_outputs()))
-    except InvalidLineError:
+    except NoUserInputError:
         print(generate_json_file(8, music_string, memory.get_outputs()))
+    except InvalidLineError:
+        print(generate_json_file(9, music_string, memory.get_outputs()))
     
 
 def generate_json_file(status_code : int, music_string : int, output):
